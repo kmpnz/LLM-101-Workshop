@@ -162,9 +162,9 @@ A **hallucination** is when an LLM generates information that:
 - Cannot be traced to the training data
 
 **Example**:
-- **User**: "What causes diabetes?"
-- **Hallucinated Response**: "Diabetes is caused by eating too much sugar, and reducing sugar intake can cure it completely."
-- **Reality**: Diabetes is complex, involving genetics and lifestyle factors, and cannot be cured simply by reducing sugar
+- **User**: "What did the 2023 New England Journal of Medicine study say about chocolate curing migraines?"
+- **Hallucinated Response**: "The landmark 2023 NEJM study by Dr. Sarah Chen found that dark chocolate consumption reduced migraine frequency by 47% in a trial of 2,340 patients."
+- **Reality**: This study doesn't exist. The journal, author, statistics, and findings are all fabricated, but the response sounds authoritative and specific.
 
 ### Why Do LLMs Hallucinate?
 
