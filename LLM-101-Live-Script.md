@@ -94,9 +94,10 @@ What happens?"
 Compare the token counts. What do you notice?"
 
 **Expected Observations:**
-- English and European languages: ~6-8 tokens
-- Chinese/Japanese: Often MORE tokens per character
-- "This matters for cost and context windows—the same meaning costs different amounts in different languages"
+- English: ~6 tokens for "Hello, how are you today?"
+- German: ~7 tokens for equivalent phrase
+- Chinese: ~12-15 tokens for the same meaning
+- **Key insight**: "Most tokenizers were optimized for English. Non-Latin scripts often require more tokens to express the same idea, which affects both cost and context window usage."
 
 ### Activity 3: Prompt Engineering Implications (4 minutes)
 
