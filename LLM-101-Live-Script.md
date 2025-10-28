@@ -379,7 +379,7 @@ The model doesn't reason about complex historical context—it pattern-matches."
 **Sentences**:
 - "The trophy doesn't fit in the suitcase because it is too large."
 - "The city council denied the protestors a permit because they feared violence."
-- "The cat chased the mouse until it got tired."
+- "The developers told the managers that they needed to improve their code quality."
 - "Sarah told Emma that she needed to work harder."
 
 4. **Discuss**: How does understanding attention change how you write prompts?
