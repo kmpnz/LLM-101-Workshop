@@ -209,6 +209,32 @@ End this section by focusing on what participants CAN do:
 - Ask for sources (though they might be made up too!)
 - Use retrieval-augmented generation (preview of advanced topics)
 
+```mermaid
+graph TD
+    A[LLM Output Received] --> B{Is the information<br/>in your prompt?}
+    B -->|Yes| C[LOW RISK<br/>✓ Summarizing<br/>✓ Reformatting<br/>✓ Analyzing provided text]
+    B -->|No| D{Is it common<br/>knowledge?}
+
+    D -->|Yes| E{Does it require<br/>complex reasoning?}
+    D -->|No| F{Is it after the<br/>training cutoff?}
+
+    E -->|No| G[MEDIUM RISK<br/>⚠ Verify if critical<br/>⚠ Check for consistency]
+    E -->|Yes| H[HIGH RISK<br/>✗ Always verify<br/>✗ May confuse correlation<br/>with causation]
+
+    F -->|Yes| I[HIGH RISK<br/>✗ No knowledge available<br/>✗ Will likely hallucinate]
+    F -->|No| J{Does it involve<br/>specific facts/numbers?}
+
+    J -->|Yes| K[MEDIUM-HIGH RISK<br/>⚠ May fabricate details<br/>⚠ Check citations<br/>⚠ Verify statistics]
+    J -->|No| L[MEDIUM RISK<br/>⚠ Generally reliable<br/>⚠ Spot check key points]
+
+    style C fill:#90EE90
+    style G fill:#FFE4B5
+    style H fill:#FFB6C6
+    style I fill:#FFB6C6
+    style K fill:#FFC085
+    style L fill:#FFE4B5
+```
+
 ---
 
 ### Part 5: Breakout Rooms (15 min)

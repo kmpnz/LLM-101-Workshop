@@ -28,6 +28,21 @@
 | 40-55 min | Breakout Room Activities | Group Work |
 | 55-60 min | Wrap-up & Q&A | Discussion |
 
+```mermaid
+gantt
+    title LLM 101 Workshop - 60 Minute Timeline
+    dateFormat mm
+    axisFormat %M min
+
+    section Session Flow
+    Welcome & Objectives           :a1, 00, 5m
+    Interactive Tokenization Demo  :a2, 05, 10m
+    Understanding Transformer      :a3, 15, 15m
+    Hallucinations Deep Dive       :a4, 30, 10m
+    Breakout Room Activities       :a5, 40, 15m
+    Wrap-up & Q&A                  :a6, 55, 5m
+```
+
 ---
 
 ## PART 1: Welcome & Objectives (5 minutes)
@@ -171,6 +186,41 @@ GPT-3 has 96 layers × 96 attention heads per layer = 9,216 different attention 
 5. The process repeats with the new token included
 
 This is why LLMs generate text token-by-token—you see it streaming in!"
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Model
+
+    User->>Model: Input: "The cat"
+    activate Model
+    Model->>Model: Process embeddings
+    Model->>Model: Apply attention layers
+    Model->>Model: Calculate token probabilities
+    Note over Model: "sat" (45%), "is" (20%),<br/>"jumped" (15%)...
+    Model-->>User: Generate: "sat"
+    deactivate Model
+
+    User->>Model: Input: "The cat sat"
+    activate Model
+    Model->>Model: Process new context
+    Model->>Model: Apply attention layers
+    Model->>Model: Calculate token probabilities
+    Note over Model: "on" (38%), "down" (22%),<br/>"still" (12%)...
+    Model-->>User: Generate: "on"
+    deactivate Model
+
+    User->>Model: Input: "The cat sat on"
+    activate Model
+    Model->>Model: Process new context
+    Model->>Model: Apply attention layers
+    Model->>Model: Calculate token probabilities
+    Note over Model: "the" (55%), "a" (25%),<br/>"my" (8%)...
+    Model-->>User: Generate: "the"
+    deactivate Model
+
+    Note over User,Model: Process repeats for each token until complete
+```
 
 ### Live Demonstration (7 minutes)
 
