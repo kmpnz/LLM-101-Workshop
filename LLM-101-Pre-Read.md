@@ -99,6 +99,19 @@ In this high-dimensional space:
 4. **Embeddings**: Each ID becomes a vector of ~1,000-12,000 numbers
 5. **Processing**: The model works with these vectors to understand and generate text
 
+```mermaid
+graph LR
+    A["Input Text:<br/>'The cat sat on the mat'"] --> B[Tokenization]
+    B --> C["Tokens:<br/>['The', ' cat', ' sat',<br/>' on', ' the', ' mat']"]
+    C --> D["Token IDs:<br/>[198, 3763, 3332,<br/>319, 262, 2603]"]
+    D --> E["Embeddings:<br/>Each ID → Vector of<br/>~1,000-12,000 numbers"]
+    E --> F[Transformer<br/>Processing]
+    F --> G[Output Generation]
+
+    style A fill:#e1f5ff
+    style G fill:#fff4e1
+```
+
 ---
 
 ## 3. The Transformer: The Engine Behind LLMs
@@ -120,6 +133,26 @@ When processing "it," the attention mechanism helps the model figure out:
 - What does "it" refer to?
 - By "attending to" different words, the model realizes "it" relates more strongly to "animal" than to "street"
 - This contextual understanding is crucial for making sense of the sentence
+
+```mermaid
+graph TD
+    A["Processing word: 'it'"] --> B{Attention Mechanism<br/>Calculates Relevance}
+    B -->|Low: 0.05| C[The]
+    B -->|High: 0.65| D[animal]
+    B -->|Low: 0.03| E[didn't]
+    B -->|Low: 0.04| F[cross]
+    B -->|Low: 0.02| G[street]
+    B -->|Low: 0.03| H[because]
+    B -->|Medium: 0.18| I[tired]
+
+    D --> J["Conclusion: 'it' refers<br/>to 'animal'"]
+    I --> J
+
+    style A fill:#e1f5ff
+    style D fill:#90EE90
+    style I fill:#FFE4B5
+    style J fill:#fff4e1
+```
 
 ### Multi-Head Attention: Multiple Perspectives
 
@@ -149,6 +182,29 @@ Having multiple heads allows the model to capture rich, nuanced understanding.
 5. **Output**: Token by token, a complete response is generated
 
 **Key Concept**: LLMs are fundamentally **prediction machines**. They predict the next word based on all previous words, using patterns learned from massive amounts of training data.
+
+```mermaid
+graph TD
+    A[Input: Token Embeddings] --> B[Layer 1: Multi-Head Attention]
+    B --> C[Layer 1: Feed Forward Network]
+    C --> D[Layer 2: Multi-Head Attention]
+    D --> E[Layer 2: Feed Forward Network]
+    E --> F[Layer 3: Multi-Head Attention]
+    F --> G[Layer 3: Feed Forward Network]
+    G --> H["..."]
+    H --> I["Layer 96: Multi-Head Attention<br/>(GPT-3 has 96 layers)"]
+    I --> J[Layer 96: Feed Forward Network]
+    J --> K[Output Layer:<br/>Probability Distribution]
+    K --> L[Next Token Prediction]
+
+    M[Each layer refines<br/>understanding] -.-> B
+    M -.-> D
+    M -.-> F
+
+    style A fill:#e1f5ff
+    style K fill:#FFE4B5
+    style L fill:#fff4e1
+```
 
 ---
 
@@ -191,6 +247,31 @@ LLMs generate one token at a time. If an early token is slightly off, subsequent
 - **Embeddings**: Poor representation of rare tokens can cause confusion
 - **Attention layers**: Focusing on wrong context leads to errors
 - **Output generation**: The probability distribution over next tokens can favor plausible-sounding but incorrect options
+
+```mermaid
+mindmap
+  root((Why LLMs<br/>Hallucinate))
+    Pattern Prediction
+      No fact database
+      Statistical patterns only
+      Trained to always respond
+      No built-in "I don't know"
+    Training Data Issues
+      Scarce/rare information
+      Noisy or incorrect data
+      Contradictions in data
+      Knowledge cutoff date
+    Architecture Limitations
+      Attention focuses wrongly
+      Cascading errors
+      Token-by-token generation
+      Poor rare token embeddings
+    Prediction Mechanism
+      Sampling from probabilities
+      Favors plausible-sounding text
+      No truth verification
+      Context window limits
+```
 
 ### Key Limitations to Remember
 
